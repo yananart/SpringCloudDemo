@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
     @Autowired
-    SchedualServiceHi schedualServiceHi;
+    ServiceHi serviceHi;
 
     @GetMapping("/hi")
     public String sayHi() {
-        return schedualServiceHi.sayHiFromClientOne();
+        return serviceHi.sayHi();
     }
 }

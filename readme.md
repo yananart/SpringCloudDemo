@@ -4,32 +4,34 @@
 
 <!-- TOC -->
 
-- [`Spring Cloud`学习资料与Demo](#spring-cloud学习资料与demo)
+- [`Spring Cloud`学习资料与Demo](#spring-cloud%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E4%B8%8Edemo)
     - [Overview](#overview)
-    - [个人感受](#个人感受)
-    - [服务中心(服务服务端) - `Eureka`实现](#服务中心服务服务端---eureka实现)
-        - [创建工程](#创建工程)
-        - [功能说明](#功能说明)
-    - [服务客户端 - `Eureka`实现](#服务客户端---eureka实现)
-        - [创建工程](#创建工程-1)
-        - [服务的提供者](#服务的提供者)
-        - [服务的消费者 - `Ribbon`+`Rest `](#服务的消费者---ribbonrest-)
-        - [服务的消费者 - `Feign`](#服务的消费者---feign)
-    - [负载均衡](#负载均衡)
-    - [断路器 - `Hystrix`](#断路器---hystrix)
-    - [路由网关 - `zuul`](#路由网关---zuul)
-        - [什么是`zuul`](#什么是zuul)
-        - [创建工程](#创建工程-2)
-        - [路由转发](#路由转发)
-        - [路由过滤](#路由过滤)
-    - [配置管理 - `Spring Cloud Config`](#配置管理---spring-cloud-config)
-        - [配置服务器 - `Config Server`](#配置服务器---config-server)
-        - [配置客户端 - `Config Client`](#配置客户端---config-client)
-        - [消息总线 - `Spring Cloud Bus`](#消息总线---spring-cloud-bus)
-    - [服务链路追踪 - `Spring Cloud Sleuth`](#服务链路追踪---spring-cloud-sleuth)
-    - [断路器监控 - `Hystrix Dashboard`](#断路器监控---hystrix-dashboard)
-    - [断路器聚合监控 - `Hystrix Turbine`](#断路器聚合监控---hystrix-turbine)
-    - [高可用的服务中心](#高可用的服务中心)
+    - [个人感受](#%E4%B8%AA%E4%BA%BA%E6%84%9F%E5%8F%97)
+    - [服务中心(服务服务端) - `Eureka`实现](#%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E6%9C%8D%E5%8A%A1%E6%9C%8D%E5%8A%A1%E7%AB%AF---eureka%E5%AE%9E%E7%8E%B0)
+        - [创建工程](#%E5%88%9B%E5%BB%BA%E5%B7%A5%E7%A8%8B)
+        - [功能说明](#%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E)
+    - [服务客户端 - `Eureka`实现](#%E6%9C%8D%E5%8A%A1%E5%AE%A2%E6%88%B7%E7%AB%AF---eureka%E5%AE%9E%E7%8E%B0)
+        - [创建工程](#%E5%88%9B%E5%BB%BA%E5%B7%A5%E7%A8%8B)
+        - [服务的提供者](#%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%8F%90%E4%BE%9B%E8%80%85)
+        - [服务的消费者 - `Ribbon`+`Rest `](#%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%B6%88%E8%B4%B9%E8%80%85---ribbonrest)
+        - [服务的消费者 - `Feign`](#%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%B6%88%E8%B4%B9%E8%80%85---feign)
+        - [Diff with `Ribbon` & `Feign`](#diff-with-ribbon--feign)
+    - [负载均衡](#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1)
+    - [断路器 - `Hystrix`](#%E6%96%AD%E8%B7%AF%E5%99%A8---hystrix)
+        - [手动添加断路器支持](#%E6%89%8B%E5%8A%A8%E6%B7%BB%E5%8A%A0%E6%96%AD%E8%B7%AF%E5%99%A8%E6%94%AF%E6%8C%81)
+        - [`Feign`对断路器支持](#feign%E5%AF%B9%E6%96%AD%E8%B7%AF%E5%99%A8%E6%94%AF%E6%8C%81)
+    - [路由网关 - `zuul`](#%E8%B7%AF%E7%94%B1%E7%BD%91%E5%85%B3---zuul)
+        - [创建工程](#%E5%88%9B%E5%BB%BA%E5%B7%A5%E7%A8%8B)
+        - [路由转发](#%E8%B7%AF%E7%94%B1%E8%BD%AC%E5%8F%91)
+        - [路由过滤](#%E8%B7%AF%E7%94%B1%E8%BF%87%E6%BB%A4)
+    - [配置管理 - `Spring Cloud Config`](#%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86---spring-cloud-config)
+        - [配置服务器 - `Config Server`](#%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8---config-server)
+        - [配置客户端 - `Config Client`](#%E9%85%8D%E7%BD%AE%E5%AE%A2%E6%88%B7%E7%AB%AF---config-client)
+        - [消息总线 - `Spring Cloud Bus`](#%E6%B6%88%E6%81%AF%E6%80%BB%E7%BA%BF---spring-cloud-bus)
+    - [服务链路追踪 - `Spring Cloud Sleuth` - `zipkin`](#%E6%9C%8D%E5%8A%A1%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA---spring-cloud-sleuth---zipkin)
+    - [断路器监控 - `Hystrix Dashboard`](#%E6%96%AD%E8%B7%AF%E5%99%A8%E7%9B%91%E6%8E%A7---hystrix-dashboard)
+    - [断路器聚合监控 - `Hystrix Turbine`](#%E6%96%AD%E8%B7%AF%E5%99%A8%E8%81%9A%E5%90%88%E7%9B%91%E6%8E%A7---hystrix-turbine)
+    - [高可用的服务中心](#%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83)
 
 <!-- /TOC -->
 
@@ -43,13 +45,33 @@ spring cloud 为开发人员提供了快速构建分布式系统的一些工具�
 
 `Spring Cloud`提供了一套完整的微服务体系构架，不同于我们往常写的`Java Web`(例如`SSM`实现的或者是利用`Spring Boot`实现的)本身是一套已经比较完整的业务体系，例如在`Controller`层对`request`进行响应，在`Service`层内调用`Dao`层或者调用其他`API`接口获取数据，`Dao`层实现了对数据库的持久化连接。
 
-而`Spring Cloud`的结构上更倾向于将各个服务模块进行拆分，每个服务单独存在，是一个独立的工程，同时由于`Spring Cloud`基于`Spring Boot`，所以服务构建编译生成成功后都是一个独立的`Jar`包，直接通过`Java`命令就能直接运行在`JVM`上，所以每个服务都能快速部署运行。同时，`Spring Cloud`将先各个服务拆分，然后通过服务注册的方法将所有服务的信息记录在一个**注册服务(服务中心)**上，通过改注册服务，其他服务信息都被其记录，而后被注册的各个服务也能互知，随后也就能互相调用。(自己觉得`Spring Cloud`构架基本功能就是这个)
+而`Spring Cloud`的结构上更倾向于将各个服务模块进行拆分，每个服务单独存在不仅包括功能拆分，还包括系统拆分、代码拆分、数据库拆分、缓存拆分等 ，每个拆分后都是一个独立的工程，同时由于`Spring Cloud`基于`Spring Boot`，所以服务构建编译生成成功后都是一个独立的`Jar`包，直接通过`Java`命令就能直接运行在`JVM`上，所以每个服务都能快速部署运行。同时，`Spring Cloud`将先各个服务拆分，然后通过服务注册的方法将所有服务的信息记录在一个**注册服务(服务中心)**上，通过该注册服务，其他服务信息都被其记录，而后被注册的各个服务也能互知，随后也就能互相调用。(自己觉得`Spring Cloud`构架基本功能就是这个)
 
 同时，`Spring Cloud`还为各个服务之间的互相整合、调用、监控等等提供了一系列工具，开发者就能更轻松地进行开发与管理。
 
 `Spring Cloud`实现的微服务体系结构示意：
 
 ![](http://upload-images.jianshu.io/upload_images/2279594-6b7c148110ebc56e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600)
+
+在`spring cloud`结构中，有以下模块：
+
+![](https://upload-images.jianshu.io/upload_images/5935687-6737b20eb1fc3d34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+
+![](https://upload-images.jianshu.io/upload_images/5935687-50866d44c7afdd16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+
+![](https://upload-images.jianshu.io/upload_images/5935687-60e0244ff50c74f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+
+![](https://upload-images.jianshu.io/upload_images/5935687-4b0adbf99f3dc4c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+
+![](https://upload-images.jianshu.io/upload_images/5935687-8c0837ef10537e48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+
+其中主要部件为：
+
+- Eureka
+- Feign || Ribbon
+- Hystrix
+- Zuul
+- Cloud Config
 
 ## 服务中心(服务服务端) - `Eureka`实现
 
@@ -388,9 +410,9 @@ public class FeignApplication {
 
 ```java
 @FeignClient("server-hi")
-public interface SchedualServiceHi {
+public interface ServiceHi {
     @GetMapping("/hi")
-    String sayHiFromClientOne();
+    String sayHi();
 }
 ```
 
@@ -400,15 +422,20 @@ public interface SchedualServiceHi {
 @RestController
 public class TestController {
     @Autowired
-    SchedualServiceHi schedualServiceHi;
+    ServiceHi serviceHi;
     @GetMapping("/hi")
     public String sayHi() {
-        return schedualServiceHi.sayHiFromClientOne();
+        return serviceHi.sayHi();
     }
 }
 ```
 
 随后，启动服务，访问该服务也能访问到端口8762的内容。
+
+### Diff with `Ribbon` & `Feign`
+
+- `Ribbon`主要用于**均衡负载**作用，是一个基于 HTTP 和 TCP 客户端的负载均衡器，它可以判断并分发具体的请求到后端的具体应用服务实例，采用轮询的方法，起到分发压力的作用。而其本身是不能调用服务的，要使用`restTemplate`实现服务调用。
+- 本质上，`Feign`内部是包含`Ribbon`的，其也是使用`Ribbon`实现负载均衡的，在使用`Fegin`过程中本质上也是使用了`Ribbon`，而且`Feign`能够更方便地实现服务调用与通信。
 
 ## 负载均衡
 
@@ -416,7 +443,7 @@ public class TestController {
 
 ![](./img/EurekaClientWeb05.png)
 
-然后不断访问Server-Ribbon服务，会发现其每次结果不同，在循环访问两个Server-Hi实例。
+然后不断访问`Server-Ribbon`或`Server-Feign`服务，会发现其每次结果不同，在循环访问两个Server-Hi实例。
 
 这样也基本实现了负载均衡，如果将一个服务同时部署在两台机器上，通过负载均衡的方法，就能将访问平均分散到两台服务器上，提高整体计算能力。
 
@@ -435,6 +462,8 @@ public class TestController {
 断路打开后，可用避免连锁故障，fallback方法可以直接返回一个固定值。 
 
 ![](http://upload-images.jianshu.io/upload_images/2279594-8dcb1f208d62046f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/600)
+
+### 手动添加断路器支持
 
 基于服务Server-Ribbon进行修改，添加`Hystrix`模块：
 
@@ -469,11 +498,47 @@ public class TestService {
 
 ![](./img/EurekaClientWeb06.png)
 
+### `Feign`对断路器支持
+
+`Feign`除了应该封装好`Ribbon`，其也封装了断路器组件，无需再导入包即可使用。
+
+新建类继承我们之前为访问其他服务实现的接口。在其中实现如果访问失败要返回的数据：
+
+```java
+@Component
+public class ServiceHystrix implements ServiceHi {
+    @Override
+    public String sayHi() {
+        return "访问服务失败";
+    }
+}
+```
+
+然后在接口的注解上添加fallback参数：
+
+```java
+@FeignClient(value = "server-hi",fallback = ServiceHystrix.class)
+public interface ServiceHi {
+    @GetMapping("/hi")
+    String sayHi();
+}
+```
+
+还需要在配置文件中开启：
+
+```yaml
+feign:
+  hystrix:
+    enabled: true
+```
+
+重启服务，然后关闭`Server-Hi`服务，访问`Server-Feign`服务，显示fallback：
+
+![](./img/EurekaClientWeb09.png)
+
 ## 路由网关 - `zuul`
 
 在Spring Cloud微服务系统中，一种常见的负载均衡方式是，客户端的请求首先经过负载均衡（`zuul`、`Ngnix`），再到达服务网关（`zuul`集群），然后再到具体的服服务。服务统一注册到高可用的服务注册中心集群，服务的所有的配置文件由配置服务管理，配置服务的配置文件放在git仓库，方便开发人员随时改配置。 
-
-### 什么是`zuul`
 
 `zuul`的主要功能是路由转发和过滤器。路由功能是微服务的一部分(感觉有些像重定向)，比如`/api/user`转发到到`user`服务，`/api/shop`转发到到`shop`服务。`zuul`默认和`ribbon`结合实现了负载均衡的功能。 
 
@@ -836,16 +901,16 @@ Mapped "{[/actuator/bus-refresh],methods=[POST]}" onto public java.lang.Object o
 
 ![](./img/RabbitMQ.png)
 
-## 服务链路追踪 - `Spring Cloud Sleuth`
+## 服务链路追踪 - `Spring Cloud Sleuth` - `zipkin`
 
 > Spring Cloud Sleuth implements a distributed tracing solution for Spring Cloud, borrowing heavily from [Dapper](http://research.google.com/pubs/pub36356.html), [Zipkin](https://github.com/openzipkin/zipkin) and HTrace. For most users Sleuth should be invisible, and all your interactions with external systems should be instrumented automatically. You can capture data simply in logs, or by sending it to a remote collector service. 
 
-微服务架构上将业务划分为服务，通过REST调用，对外暴露的一个接口，很多时候一个接口可能需要很多个服务协同才能完成，如果链路上任何一个服务出现问题，都会形成导致接口调用失败。而随着业务的不断扩张，服务之间互相调用会越来越复杂。 服务链路追踪主要功能就是在分布式系统中提供追踪解决方案，兼容支持`zipkin`，你在pom文件中引入相应的依赖即可使用。
+微服务架构上将业务划分为服务，通过REST调用，对外暴露的一个接口，很多时候一个接口可能需要很多个服务协同才能完成，如果链路上任何一个服务出现问题，都会形成导致接口调用失败。而随着业务的不断扩张，服务之间互相调用会越来越复杂。 服务链路追踪主要功能就是在分布式系统中提供追踪解决方案，兼容支持`zipkin`，使用日志收集的工具包`Spring Cloud Sleuth`实现,你在pom文件中引入相应的依赖即可使用。
 
 在`Spring Boot`老版本(1.0)中，`zipkin`需要自行引入构建，在2.0中`Spring Cloud`已经移除该支持，需要下载Jar包直接运行即可，[下载地址](https://dl.bintray.com/openzipkin/maven/io/zipkin/java/zipkin-server/)。下载成功后直接在本地控制台运行即可：
 
 ```powershell
-java -jar zipkin-server-*.jar
+java -jar zipkin-server-*-exec.jar
 ```
 
 访问http://localhost:9494即可查看到监控界面。
@@ -889,7 +954,7 @@ spring:
 
 在启动类上添加注解`@EnableHystrixDashboard`以启动断路器监控。
 
-重启服务，访问http://ideapad720s:8764/hystrix即可看到监控面板，在日志信息内也能看到要监控的地址：
+重启服务，访问http://localhost:8764/hystrix即可看到监控面板，在日志信息内也能看到要监控的地址：
 
 ```powershell
 Proxy opening connection to: http://ideapad720s:8764/hystrix.stream
