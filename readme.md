@@ -2,6 +2,10 @@
 
 这个仓库是我学习`Spring Cloud`中的流程、心得与写的demo，分享出来给大家参考。
 
+[Github地址](https://github.com/yananart/SpringCloudDemo)
+
+[Gitee地址](https://gitee.com/yananart/SpringCloudDemo)
+
 <!-- TOC -->
 
 - [`Spring Cloud`学习资料与Demo](#spring-cloud%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E4%B8%8Edemo)
