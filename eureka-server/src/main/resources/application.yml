@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: eureka-server
+  profiles:
+    active: peer3
+
+eureka:
+  client:
+    register-with-eureka: false #无需向服务中心注册自己
+    fetch-registry: false #不检索服务

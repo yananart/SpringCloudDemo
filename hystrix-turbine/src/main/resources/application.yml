@@ -1,0 +1,18 @@
+server:
+  port: 8666
+
+spring:
+  application:
+    name: server-turbine
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:8761/eureka/,http://peer2:8762/eureka/,http://peer3:8763/eureka/
+
+turbine:
+  app-config: SERVER-RIBBON #表明监控哪些服务
+  aggregator:
+    cluster-config: default # 指定聚合哪些集群，多个使用","分割，默认为default。
+  cluster-name-expression: new String("default")
+

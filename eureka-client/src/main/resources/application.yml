@@ -1,0 +1,16 @@
+server: #端口号
+  port: 8663
+
+spring:
+  application:
+    name: server-hi
+  zipkin:
+    base-url: http://localhost:9411
+
+eureka:
+  client:
+    service-url: #服务注册地址
+      defaultZone: http://peer1:8761/eureka/,http://peer2:8762/eureka/,http://peer3:8763/eureka/
+  instance:
+    lease-expiration-duration-in-seconds: 5  #发呆时间，即服务续约到期时间（缺省为90s）
+    lease-renewal-interval-in-seconds: 5     #心跳时间，即服务续约间隔时间（缺省为30s）
